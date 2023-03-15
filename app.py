@@ -2,7 +2,7 @@ from flask import Flask, request
 from bioblend import galaxy
 from flask_cors import CORS
 
-app = Flask(__name__)  # __name__代表当前app.py这个模块
+app = Flask(__name__)
 CORS(app, resources=r'/*')
 gi = galaxy.GalaxyInstance(url='https://usegalaxy.org/', key='5708d9d457c6681669c3ad03027263ba')
 hi = gi.histories
@@ -46,14 +46,6 @@ def get_tools():
 @app.route('/blog/<int:blog_id>')
 def blog_detail(blog_id):
     return "Blog Id is: %s" % blog_id
-
-
-# example2
-# /blog/list?page=1
-@app.route('/blog/list')
-def blog_list():
-    page = request.args.get("page", default=1, type=int)
-    return f"You get Page {page}"
 
 
 if __name__ == '__main__':
